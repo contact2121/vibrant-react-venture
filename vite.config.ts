@@ -21,40 +21,22 @@ export default defineConfig(({ mode }) => ({
     target: 'esnext',
     minify: 'terser',
     cssMinify: true,
-    cssCodeSplit: true,
-    modulePreload: {
-      polyfill: true
-    },
     rollupOptions: {
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
           motion: ['framer-motion'],
-          ui: ['@radix-ui/react-navigation-menu', '@radix-ui/react-dialog'],
-          utils: ['@tanstack/react-query']
+          ui: ['@radix-ui/react-navigation-menu', '@radix-ui/react-dialog']
         }
-      },
-      treeshake: true,
+      }
     },
     chunkSizeWarningLimit: 1000,
+    base: 'https://fioriforyou.com/',
     reportCompressedSize: false,
-    sourcemap: false,
-    commonjsOptions: {
-      include: [/node_modules/],
-      extensions: ['.js', '.cjs'],
-      strictRequires: true,
-      transformMixedEsModules: true,
-    }
+    cssCodeSplit: true,
   },
   optimizeDeps: {
     include: ['react', 'react-dom', 'framer-motion'],
-    exclude: ['@radix-ui/react-navigation-menu', '@radix-ui/react-dialog'],
-    esbuildOptions: {
-      target: 'esnext',
-      splitting: true,
-      minify: true,
-      format: 'esm',
-    }
-  },
-  cacheDir: '.vite',
+    exclude: ['@radix-ui/react-navigation-menu', '@radix-ui/react-dialog']
+  }
 }));

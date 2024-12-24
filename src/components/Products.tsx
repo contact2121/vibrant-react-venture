@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import {
   Carousel,
   CarouselContent,
@@ -26,44 +26,12 @@ const Products = () => {
   const { data: products, isLoading, error } = useQuery({
     queryKey: ['products'],
     queryFn: fetchAllProducts,
-    staleTime: 1000 * 60 * 5, // Cache for 5 minutes
-    gcTime: 1000 * 60 * 30, // Keep in cache for 30 minutes (replaces old cacheTime)
   });
 
-  // Memoize error message
-  const errorMessage = useMemo(() => {
-    if (error) {
-      console.error('Erreur de chargement des produits:', error);
-      return <div className="text-center text-red-500">Échec du chargement des produits</div>;
-    }
-    return null;
-  }, [error]);
-
-  // Memoize loading skeletons
-  const loadingSkeletons = useMemo(() => (
-    Array.from({ length: 6 }).map((_, index) => (
-      <CarouselItem 
-        key={index} 
-        className="pl-4 basis-full md:basis-1/2 lg:basis-1/4"
-      >
-        <div className="h-[400px] bg-gray-100 rounded-lg animate-pulse" />
-      </CarouselItem>
-    ))
-  ), []);
-
-  // Memoize product items
-  const productItems = useMemo(() => (
-    products?.map((product) => (
-      <CarouselItem 
-        key={product.id} 
-        className="pl-4 basis-full md:basis-1/2 lg:basis-1/4"
-      >
-        <ProductCard product={product} />
-      </CarouselItem>
-    ))
-  ), [products]);
-
-  if (errorMessage) return errorMessage;
+  if (error) {
+    console.error('Erreur de chargement des produits:', error);
+    return <div className="text-center text-red-500">Échec du chargement des produits</div>;
+  }
 
   return (
     <div className="w-full overflow-hidden bg-gray-50">
@@ -75,7 +43,25 @@ const Products = () => {
         <div className="relative w-full" ref={emblaRef}>
           <Carousel className="w-full">
             <CarouselContent className="-ml-4">
-              {isLoading ? loadingSkeletons : productItems}
+              {isLoading ? (
+                Array.from({ length: 6 }).map((_, index) => (
+                  <CarouselItem 
+                    key={index} 
+                    className="pl-4 basis-full md:basis-1/2 lg:basis-1/4"
+                  >
+                    <div className="h-[400px] bg-gray-100 rounded-lg animate-pulse" />
+                  </CarouselItem>
+                ))
+              ) : (
+                products?.map((product) => (
+                  <CarouselItem 
+                    key={product.id} 
+                    className="pl-4 basis-full md:basis-1/2 lg:basis-1/4"
+                  >
+                    <ProductCard product={product} />
+                  </CarouselItem>
+                ))
+              )}
             </CarouselContent>
             <CarouselPrevious
               aria-label="Previous product"
@@ -96,4 +82,4 @@ const Products = () => {
   );
 };
 
-export default React.memo(Products);
+export default Products;

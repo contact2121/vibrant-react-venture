@@ -1,23 +1,18 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Product } from '../types/product';
-import { memo } from 'react';
 
 interface ProductCardProps {
   product: Product;
 }
 
-const ProductCard = memo(({ product }: ProductCardProps) => {
+const ProductCard = ({ product }: ProductCardProps) => {
   const navigate = useNavigate();
-
-  const handleClick = React.useCallback(() => {
-    navigate(`/product/${product.id}`);
-  }, [product.id, navigate]);
 
   return (
     <div 
       className="h-full hover:shadow-lg hover:transform hover:scale-[1.02] transition-all duration-300 cursor-pointer"
-      onClick={handleClick}
+      onClick={() => navigate(`/product/${product.id}`)}
     >
       <div className="h-[300px] bg-transparent overflow-hidden mb-3">
         <img
@@ -25,8 +20,6 @@ const ProductCard = memo(({ product }: ProductCardProps) => {
           alt={product.name}
           className="w-full h-full object-contain mix-blend-normal"
           loading="lazy"
-          decoding="async"
-          fetchPriority="high"
         />
       </div>
       <div className="p-2 md:p-4">
@@ -43,8 +36,6 @@ const ProductCard = memo(({ product }: ProductCardProps) => {
       </div>
     </div>
   );
-});
-
-ProductCard.displayName = 'ProductCard';
+};
 
 export default ProductCard;
