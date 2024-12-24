@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { toast } from "@/components/ui/use-toast";
 
 const API_URL = 'https://respizenmedical.com/fiori/track_visitor.php';
 const MAX_RETRIES = 3;
@@ -27,8 +26,6 @@ export const trackVisitor = async (pageName: string, retryCount = 0): Promise<vo
   try {
     console.log('Starting visitor tracking for page:', pageName);
 
-    // Simplify the visitor data - only send the page name
-    // The server will handle everything else
     const visitorData: VisitorData = {
       page_visitors: pageName
     };
@@ -40,21 +37,13 @@ export const trackVisitor = async (pageName: string, retryCount = 0): Promise<vo
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      timeout: 5000 // 5 seconds timeout
+      timeout: 5000
     });
 
     console.log('Tracking response:', response.data);
 
     if (response.data.status === 'success') {
       console.log('Visitor tracking successful:', response.data);
-      
-      // Optional: Show success toast with location info
-      if (response.data.data) {
-        toast({
-          title: "Visit Tracked",
-          description: `From ${response.data.data.city}, ${response.data.data.country}`,
-        });
-      }
     } else {
       throw new Error(response.data.message || 'Unknown error occurred');
     }
@@ -63,17 +52,10 @@ export const trackVisitor = async (pageName: string, retryCount = 0): Promise<vo
 
     if (retryCount < MAX_RETRIES) {
       console.log(`Retrying... Attempt ${retryCount + 1} of ${MAX_RETRIES}`);
-      await delay(RETRY_DELAY * (retryCount + 1)); // Exponential backoff
+      await delay(RETRY_DELAY * (retryCount + 1));
       return trackVisitor(pageName, retryCount + 1);
     }
 
     console.error('Failed to track visitor after maximum retries');
-    
-    // Optional: Show error toast
-    toast({
-      title: "Error",
-      description: "Failed to track visit",
-      variant: "destructive",
-    });
   }
 };

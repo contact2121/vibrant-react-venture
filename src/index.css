@@ -61,6 +61,14 @@
   [class*="NavigationMenuContent"] {
     font-family: 'WomanFontRegular', sans-serif !important;
   }
+
+  /* Remove yellow hover effect */
+  a:hover,
+  button:hover,
+  [role="button"]:hover {
+    -webkit-tap-highlight-color: transparent;
+    outline: none !important;
+  }
 }
 
 .glass-effect {
@@ -75,16 +83,14 @@
   @apply bg-gradient-to-b from-white/5 via-transparent to-white/5 backdrop-blur-sm border-t border-b border-white/5 shadow-lg rounded-lg px-8 py-4;
 }
 
-
 .product-box {
   @apply bg-secondary p-5 rounded-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-xl;
 }
 
 .nav-item:hover {
   background-color: transparent;
-  color: black;  /* Change hover color to black */
+  color: black;
 }
-
 
 @media (max-width: 1024px) {
   .nav-link {
@@ -104,24 +110,22 @@
 @layer base {
   /* Scrollbar Styles */
   ::-webkit-scrollbar {
-    width: 12px;  /* Adjust width as needed */
+    width: 12px;
   }
 
   ::-webkit-scrollbar-track {
-    background: #f1f1f1;  /* Light background for the scrollbar track */
+    background: #f1f1f1;
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: #700100;  /* Red color for the scrollbar thumb */
-    border-radius: 10px;  /* Optional: adds rounded corners to the scrollbar thumb */
-    border: 3px solid #f1f1f1;  /* Optional: adds a border around the thumb */
+    background-color: #700100;
+    border-radius: 10px;
+    border: 3px solid #f1f1f1;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background-color: #b40000;  /* Darker red when hovering over the thumb */
+    background-color: #b40000;
   }
-
-  
 }
 
 /* Google Translate Styles */
