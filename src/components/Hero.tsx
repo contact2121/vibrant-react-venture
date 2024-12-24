@@ -1,25 +1,83 @@
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-export const Hero = () => {
+const Hero = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  
+  const banners = [
+    {
+      image: 'banner.png',
+      title: 'Univers cadeau'
+    },
+    {
+      image: 'banner2.png',
+      title: 'Nouvelle collection'
+    },
+    {
+      image: 'banner3.png',
+      title: 'Le sur mesure'
+    }
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prevIndex) => 
+        prevIndex === banners.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 8000);
+
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <div className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-accent/20 to-secondary animate-fade-in" />
-      <div className="relative container mx-auto px-4 py-16 text-center">
-        <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-slide-up">
-          Welcome to Your Next Project
-        </h1>
-        <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-2xl mx-auto animate-slide-up">
-          Build something amazing with modern web technologies and beautiful design
-        </p>
-        <Button
-          size="lg"
-          className="animate-slide-up hover:translate-x-1 transition-transform"
+    <section className="relative h-screen overflow-hidden">
+      <AnimatePresence mode='wait'>
+        <motion.div
+          key={currentIndex}
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: `url('${banners[currentIndex].image}')`,
+            willChange: 'transform'
+          }}
+          initial={{ opacity: 0, scale: 1.1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.95 }}
+          transition={{
+            duration: 1.2,
+            ease: [0.43, 0.13, 0.23, 0.96]
+          }}
+        />
+      </AnimatePresence>
+
+      <div className="absolute inset-0 bg-black/50" />
+
+      <div className="absolute bottom-8 w-full px-4 md:px-8 lg:left-8 lg:bottom-12 lg:w-auto">
+        <motion.h2 
+          key={`title-${currentIndex}`}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          className="text-white text-xl md:text-2xl font-bold mb-3 text-center lg:text-left"
         >
-          Get Started
-          <ArrowRight className="ml-2 h-4 w-4" />
-        </Button>
+          {banners[currentIndex].title}
+        </motion.h2>
+        
+        <div className="w-32 md:w-44 h-[3px] bg-gray-600 rounded-full mx-auto lg:mx-0">
+          <motion.div
+            className="h-full bg-white rounded-full"
+            initial={{ width: '0%' }}
+            animate={{ width: '100%' }}
+            transition={{
+              duration: 8,
+              ease: 'linear',
+              repeat: 0
+            }}
+            key={`progress-${currentIndex}`}
+          />
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
+
+export default Hero;

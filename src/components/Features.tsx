@@ -1,41 +1,44 @@
 import { Code, Palette, Zap } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const features = [
   {
-    icon: <Code className="h-8 w-8 mb-4 text-primary" />,
-    title: "Modern Development",
-    description: "Built with React, TypeScript, and Vite for the best developer experience",
+    title: "Fast Development",
+    description: "Quick iterations with hot reload and modern development tools.",
+    icon: <Zap className="w-10 h-10 text-blue-500" />,
   },
   {
-    icon: <Palette className="h-8 w-8 mb-4 text-primary" />,
     title: "Beautiful Design",
-    description: "Crafted with modern design principles and smooth animations",
+    description: "Stunning UI components and responsive layouts out of the box.",
+    icon: <Palette className="w-10 h-10 text-purple-500" />,
   },
   {
-    icon: <Zap className="h-8 w-8 mb-4 text-primary" />,
-    title: "Lightning Fast",
-    description: "Optimized for performance and the best user experience",
+    title: "Clean Code",
+    description: "Well-structured TypeScript code following best practices.",
+    icon: <Code className="w-10 h-10 text-pink-500" />,
   },
 ];
 
-export const Features = () => {
+const Features = () => {
   return (
-    <div className="py-24 bg-secondary">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+    <div className="py-20 px-4">
+      <div className="max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {features.map((feature, index) => (
-            <div
-              key={index}
-              className="text-center p-6 rounded-lg bg-white shadow-sm hover:shadow-md transition-shadow animate-fade-in"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              <div className="flex justify-center">{feature.icon}</div>
-              <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-              <p className="text-gray-600">{feature.description}</p>
-            </div>
+            <Card key={index} className="hover-card">
+              <CardHeader>
+                <div className="mb-4">{feature.icon}</div>
+                <CardTitle>{feature.title}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-600">{feature.description}</p>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </div>
     </div>
   );
 };
+
+export default Features;
