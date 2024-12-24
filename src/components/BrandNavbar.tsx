@@ -7,7 +7,7 @@ const BrandNavbar = () => {
         <img 
           src="logo.png" 
           alt="FIORI Logo" 
-          className="mx-auto h-12" 
+          className="mx-auto h-9" 
         />
       </div>
     </div>

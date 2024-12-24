@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { ChevronRight, MapPin } from 'lucide-react';
 import { useToast } from "@/components/ui/use-toast";
 import axios from 'axios';
 
@@ -28,7 +27,7 @@ const Footer = () => {
         throw new Error(response.data.message);
       }
     } catch (error) {
-      console.error('Newsletter subscription error:', error);
+      console.error('Erreur d\'inscription à la newsletter:', error);
       toast({
         variant: "destructive",
         title: "Erreur",
@@ -41,68 +40,105 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-[#471818] text-white py-8 lg:py-10 px-4 lg:px-16 text-[1rem] lg:text-[1.1rem] font-['WomanFontBold']">
-      {/* Newsletter Section */}
-      <div className="mb-7">
-        <h3 className="text-[1.1rem] text-left lg:text-[1.25rem] font-['WomanFontBold'] mb-3.5">NEWSLETTER</h3>
-        <p className="mb-5.5 text-left leading-relaxed">
-          Inscrivez-vous pour recevoir par e-mail des mises à jour <br className="hidden lg:block" />
-          sur les dernières collections, campagnes et vidéos de Fiori.
-        </p>
-        <br></br>
-        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-center gap-4 sm:gap-0">
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email"
-            className="w-full sm:w-80 mr-0 sm:mr-3.5 px-3 py-3 bg-white/20 border border-red-500 rounded
-                     text-white placeholder-white/70 outline-none backdrop-blur-sm
-                     shadow-md transition-all duration-300
-                     focus:border-[#ff5e5e] focus:shadow-[#ff5e5e]/50 focus:shadow-lg
-                     font-['WomanFontBold']"
-            disabled={isLoading}
-          />
-          <button 
-            type="submit" 
-            className="text-white text-[1.3rem] disabled:opacity-50 transition-opacity"
-            disabled={isLoading}
-          >
-            <ChevronRight className="w-7 h-7" />
-          </button>
-        </form>
-      </div>
-
-      <div className="text-left lg:text-right">
-        <p className="flex items-start lg:items-center lg:justify-end my-2.5 font-['WomanFontBold'] gap-2">
-          <MapPin className="mr-2 text-[#ff5e5e] w-6 h-6 lg:w-7 lg:h-7 mt-1 lg:mt-0" />
-          <span className="flex-1 lg:flex-none">Lac 1 juste à côté de carré italien les berges du lac, Tunis, Tunisie</span>
-        </p>
-        <p className="flex items-start lg:items-center lg:justify-end my-2.5 font-['WomanFontBold'] gap-2">
-          <MapPin className="mr-2 text-[#ff5e5e] w-6 h-6 lg:w-7 lg:h-7 mt-1 lg:mt-0" />
-          <span className="flex-1 lg:flex-none">Tunisia mall en face Zara et Zayn</span>
-        </p>
-      </div>
-
-      <div className="border-t border-white my-7"></div>
-
-      <div className="flex flex-col lg:flex-row justify-between items-center gap-4 lg:gap-0">
-        <div className="text-[0.85rem] lg:text-[0.95rem] font-['WomanFontBold'] text-center lg:text-left">
-          © 2024 FioriForYou - Tous droits réservés
+    <footer className="bg-white text-gray-800">
+      {/* Barre Newsletter */}
+      <div className="border-y border-gray-200">
+        <div className="container mx-auto px-4 py-3.5 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-sm font-medium">Abonnez-vous aujourd'hui et obtenez 5% de réduction sur votre premier achat</p>
+          <form onSubmit={handleSubmit} className="flex gap-2 w-full md:w-auto">
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Entrez votre email"
+              className="px-4 py-2 rounded-md border border-gray-300 flex-1 md:w-[280px] text-sm"
+            />
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="bg-[#700100] text-white px-6 py-2 rounded-md text-sm hover:bg-[#700100]/90"
+            >
+              S'abonner
+            </button>
+          </form>
         </div>
-        <div className="space-x-6">
-          <a href="#" className="text-white hover:text-[#ff5e5e] transition-colors text-[1.1rem] lg:text-[1.25rem]">
-            <i className="fab fa-facebook-f"></i>
-          </a>
-          <a href="#" className="text-white hover:text-[#ff5e5e] transition-colors text-[1.1rem] lg:text-[1.25rem]">
-            <i className="fab fa-instagram"></i>
-          </a>
-          <a href="#" className="text-white hover:text-[#ff5e5e] transition-colors text-[1.1rem] lg:text-[1.25rem]">
-            <i className="fab fa-tiktok"></i>
-          </a>
-          <a href="#" className="text-white hover:text-[#ff5e5e] transition-colors text-[1.1rem] lg:text-[1.25rem]">
-            <i className="fab fa-linkedin-in"></i>
-          </a>
+      </div>
+
+      {/* Contenu Principal du Footer */}
+      <div className="container mx-auto px-4 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-12 gap-y-8">
+          {/* Contactez-nous */}
+          <div>
+            <h3 className="font-semibold text-sm mb-4">CONTACTEZ-NOUS</h3>
+            <ul className="space-y-2 text-sm">
+              <li className="flex items-center gap-2">
+                <span className="inline-block">+212-529-15-93-92</span>
+              </li>
+              <li>
+                <a href="#" className="hover:underline flex items-center gap-2">
+                  <span>Envoyez-nous un email</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:underline flex items-center gap-2">
+                  <span>Chat en direct</span>
+                </a>
+              </li>
+            </ul>
+            <p className="mt-6 mb-3 text-sm">Suivez-nous</p>
+            <div className="flex gap-3">
+              <a href="#" className="hover:text-[#700100]-600"><i className="fab fa-instagram text-lg"></i></a>
+              <a href="#" className="hover:text-[#700100]-600"><i className="fab fa-facebook text-lg"></i></a>
+              <a href="#" className="hover:text-[#700100]-600"><i className="fab fa-youtube text-lg"></i></a>
+              <a href="#" className="hover:text-[#700100]-600"><i className="fab fa-tiktok text-lg"></i></a>
+            </div>
+          </div>
+
+          {/* À propos */}
+          <div>
+            <h3 className="font-semibold text-sm mb-4">À PROPOS</h3>
+            <ul className="space-y-2 text-sm">
+              <li><a href="#" className="hover:underline">Qu'est-ce que Fiori</a></li>
+              <li><a href="#" className="hover:underline">Rapport d'impact</a></li>
+              <li><a href="#" className="hover:underline">Prêt à vendre sur Fiori ?</a></li>
+            </ul>
+          </div>
+
+          {/* Service Client */}
+          <div>
+            <h3 className="font-semibold text-sm mb-4">SERVICE CLIENT</h3>
+            <ul className="space-y-2 text-sm">
+              <li><a href="#" className="hover:underline">Nous contacter</a></li>
+              <li><a href="#" className="hover:underline">Informations de livraison</a></li>
+              <li><a href="#" className="hover:underline">FAQ</a></li>
+              <li><a href="#" className="hover:underline">Politique de retour</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="font-semibold text-sm mb-4">LES ARTISANS</h3>
+            <ul className="space-y-2 text-sm">
+              <li><a href="#" className="hover:underline">Le monde Fiori</a></li>
+              <li><a href="#" className="hover:underline">L'univers Cadeaux</a></li>
+              <li><a href="#" className="hover:underline">Le prét à porter</a></li>
+              <li><a href="#" className="hover:underline">Accessoires</a></li>
+              <li><a href="#" className="hover:underline">Le sur mesure</a></li>
+              <li><a href="#" className="hover:underline">Outlet</a></li>
+
+            </ul>
+            <div className="mt-8">
+              <p className="text-sm mb-2">Nous acceptons</p>
+              <div className="flex gap-2">
+                <img src="https://i.ibb.co/JnwRLrJ/visa-and-mastercard-logos-logo-visa-png-logo-visa-mastercard-png-visa-logo-white-png-awesome-logos.png" alt="Mastercard" className="h-7" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Barre du Bas */}
+        <div className="mt-12 pt-6 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
+          <p>© 2024 FioriForYou</p>
+          <p className="text-xs">Fait avec ❤️ en Tunisia par <strong>Holastudie</strong></p>
         </div>
       </div>
     </footer>

@@ -5,7 +5,7 @@ const NewCollection = () => {
   return (
     <section className="bg-[#4A0404] text-white w-full">
       <div className="w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2">
+        <div className="grid grid-cols-1 lg:grid-cols-2 lg:divide-x-[3px] lg:divide-white">
           <div className="space-y-4 md:space-y-6 px-4 lg:px-8 py-8 md:py-15">
             <div>
               <h2 className="text-3xl md:text-4xl font-['WomanFontBold']">Nouvelle Collection</h2>

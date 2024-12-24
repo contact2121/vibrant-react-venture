@@ -8,7 +8,7 @@ import SubMenuSection from '../navigation/SubMenuSection';
 import GiftUniverseMenu from '../main-navigation/GiftUniverseMenu';
 const MainNavbarProduct = () => {
   return (
-    <div className=" w-full z-15  bg-[#EFEDED] text-center lg:top-[160px] top-[120px] px-3 font-['WomanFont']">
+    <div className=" w-full z-15  bg-[#EFEDED] text-center lg:top-[-51%] top-[-150px] px-4 font-['WomanFont']">
       <NavigationMenu className="mx-auto max-w-screen-2xl">
         <NavigationMenuList className="flex flex-col lg:flex-row lg:gap-14 gap-6 items-center">
           

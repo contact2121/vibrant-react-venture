@@ -7,7 +7,7 @@ const BrandNavbarSection = () => {
         <img
           src="../logoblack.png"
           alt="FIORI Logo"
-          className="mx-auto h-[5.95rem]" // Increased from h-12 (3rem) to 3.75rem (30% larger)
+          className="mx-auto h-[4.95rem]" // Increased from h-12 (3rem) to 3.75rem (30% larger)
         />
       </div>
     </div>

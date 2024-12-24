@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  
+
   const banners = [
     {
       image: 'banner.png',
@@ -21,7 +21,7 @@ const Hero = () => {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentIndex((prevIndex) => 
+      setCurrentIndex((prevIndex) =>
         prevIndex === banners.length - 1 ? 0 : prevIndex + 1
       );
     }, 8000);
@@ -30,7 +30,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative h-screen overflow-hidden">
+    <section className="relative h-[95vh] overflow-hidden"> {/* Changed from h-screen to h-[90vh] */}
       <AnimatePresence mode='wait'>
         <motion.div
           key={currentIndex}
@@ -51,29 +51,43 @@ const Hero = () => {
 
       <div className="absolute inset-0 bg-black/50" />
 
-      <div className="absolute bottom-8 w-full px-4 md:px-8 lg:left-8 lg:bottom-12 lg:w-auto">
-        <motion.h2 
-          key={`title-${currentIndex}`}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          className="text-white text-xl md:text-2xl font-bold mb-3 text-center lg:text-left"
-        >
-          {banners[currentIndex].title}
-        </motion.h2>
-        
-        <div className="w-32 md:w-44 h-[3px] bg-gray-600 rounded-full mx-auto lg:mx-0">
-          <motion.div
-            className="h-full bg-white rounded-full"
-            initial={{ width: '0%' }}
-            animate={{ width: '100%' }}
-            transition={{
-              duration: 8,
-              ease: 'linear',
-              repeat: 0
-            }}
-            key={`progress-${currentIndex}`}
-          />
+      <div className="absolute bottom-6 w-full px-4 md:px-6 lg:px-8">
+        <div className="flex flex-col items-center lg:items-start">
+          <div className="flex justify-center lg:justify-start gap-4">
+            {banners.map((banner, index) => (
+              <div
+                key={index}
+                className="flex flex-col items-center lg:items-start"
+                style={{ minWidth: '100px' }}
+              >
+                <motion.h2
+                  className={`text-xs md:text-sm font-medium mb-1 text-center lg:text-left transition-colors duration-300 ${
+                    currentIndex === index ? 'text-white' : 'text-gray-400'
+                  }`}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                >
+                  {banner.title}
+                </motion.h2>
+                
+                <div className="w-full h-[1px] bg-gray-600 rounded-full">
+                  {currentIndex === index && (
+                    <motion.div
+                      className="h-full bg-white rounded-full"
+                      initial={{ width: '0%' }}
+                      animate={{ width: '100%' }}
+                      transition={{
+                        duration: 8,
+                        ease: 'linear',
+                        repeat: 0
+                      }}
+                      key={`progress-${currentIndex}`}
+                    />
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

@@ -25,9 +25,9 @@ const TopNavbar = () => {
 
   return (
     <div className="font-['WomanFontRegular']">
-      <nav className="bg-primary px-6 py-4 shadow-md">
+      <nav className="bg-primary px-3 py-3 sm:py-[8px] shadow-md"> {/* Reduced from py-4 (16px) to py-[14px] on desktop */}
         <div className="container mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-0">
-          <div className="flex items-center justify-between w-full sm:w-auto">
+          <div className="flex items-center justify-between w-full sm:w-auto sm:h-[90%]"> {/* Added height reduction for desktop */}
             <button
               onClick={toggleMenu}
               className="lg:hidden text-white hover:text-accent transition-colors duration-300"
@@ -55,7 +55,7 @@ const TopNavbar = () => {
             </div>
           </div>
 
-          <div className="hidden sm:flex items-center gap-4">
+          <div className="hidden sm:flex items-center gap-4 sm:h-[90%]"> {/* Added height reduction for desktop */}
             <button
               onClick={() => setIsContactModalOpen(true)}
               className="flex items-center gap-2 text-sm text-white whitespace-nowrap hover:text-accent transition-colors duration-300"
@@ -63,7 +63,7 @@ const TopNavbar = () => {
               <Phone size={18} />
               CONTACTEZ-NOUS
             </button>
-          <CartIcon />
+            <CartIcon />
           </div>
         </div>
       </nav>

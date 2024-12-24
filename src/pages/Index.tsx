@@ -105,7 +105,7 @@ const Index = () => {
                 </Suspense>
               </motion.div>
               
-              <motion.div
+              {/* <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: isInView ? 1 : 0 }}
                 transition={{ duration: 2.4 }}
@@ -114,7 +114,7 @@ const Index = () => {
                   <BrandIntro />
                 </Suspense>
               </motion.div>
-
+ */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: isInView ? 1 : 0 }}

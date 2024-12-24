@@ -92,7 +92,7 @@ const NewsletterPopup = () => {
             </h2>
             
             <p className="text-white/80 mb-4 sm:mb-6 text-sm sm:text-base">
-              Inscrivez-vous à notre newsletter et bénéficiez de -10% sur votre première commande !
+              Inscrivez-vous à notre newsletter et bénéficiez de -5% sur votre première commande !
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
