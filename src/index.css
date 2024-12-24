@@ -45,6 +45,9 @@
     font-family: 'WomanFontRegular', sans-serif;
     font-weight: 300;
     -webkit-tap-highlight-color: transparent !important;
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
   }
   body {
     @apply bg-background text-foreground m-0 p-0;
@@ -64,7 +67,7 @@
     font-family: 'WomanFontRegular', sans-serif !important;
   }
 
-  /* Remove yellow hover effect globally */
+  /* Remove all hover effects and highlights globally */
   a,
   button,
   [role="button"],
@@ -73,8 +76,13 @@
   .NavigationMenuTrigger,
   .NavigationMenuItem,
   .NavigationMenuContent,
-  .NavigationMenuLink {
+  .NavigationMenuLink,
+  input[type="button"],
+  input[type="submit"],
+  .clickable,
+  .interactive {
     -webkit-tap-highlight-color: transparent !important;
+    -webkit-touch-callout: none !important;
     outline: none !important;
     user-select: none !important;
   }
@@ -86,6 +94,30 @@
 
   /* Remove touch highlight color on mobile */
   * {
+    -webkit-tap-highlight-color: transparent !important;
+  }
+
+  /* Prevent text selection */
+  .no-select {
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
+  }
+
+  /* Override any default button styles */
+  button,
+  .button,
+  [role="button"] {
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
+    outline: none !important;
+    cursor: pointer;
+  }
+
+  /* Override hover states */
+  *:hover {
     -webkit-tap-highlight-color: transparent !important;
   }
 }
