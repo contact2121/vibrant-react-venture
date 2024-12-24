@@ -35,6 +35,7 @@
     @apply overflow-x-hidden;
     width: 100%;
     position: relative;
+    -webkit-tap-highlight-color: transparent;
   }
 }
 
@@ -43,6 +44,7 @@
     @apply border-border;
     font-family: 'WomanFontRegular', sans-serif;
     font-weight: 300;
+    -webkit-tap-highlight-color: transparent !important;
   }
   body {
     @apply bg-background text-foreground m-0 p-0;
@@ -62,12 +64,29 @@
     font-family: 'WomanFontRegular', sans-serif !important;
   }
 
-  /* Remove yellow hover effect */
-  a:hover,
-  button:hover,
-  [role="button"]:hover {
-    -webkit-tap-highlight-color: transparent;
+  /* Remove yellow hover effect globally */
+  a,
+  button,
+  [role="button"],
+  [role="link"],
+  .nav-link,
+  .NavigationMenuTrigger,
+  .NavigationMenuItem,
+  .NavigationMenuContent,
+  .NavigationMenuLink {
+    -webkit-tap-highlight-color: transparent !important;
     outline: none !important;
+    user-select: none !important;
+  }
+
+  /* Remove focus outline */
+  *:focus {
+    outline: none !important;
+  }
+
+  /* Remove touch highlight color on mobile */
+  * {
+    -webkit-tap-highlight-color: transparent !important;
   }
 }
 
