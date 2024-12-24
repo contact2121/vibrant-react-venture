@@ -10,8 +10,6 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     react({
-      jsxRuntime: 'automatic',
-      // Remove fastRefresh as it's not a valid option
       babel: {
         plugins: [
           ["@babel/plugin-transform-react-jsx", { optimize: true }]
