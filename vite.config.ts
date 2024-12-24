@@ -10,8 +10,8 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     react({
-      fastRefresh: true,
-      // Enable babel optimization
+      jsxRuntime: 'automatic',
+      // Remove fastRefresh as it's not a valid option
       babel: {
         plugins: [
           ["@babel/plugin-transform-react-jsx", { optimize: true }]
@@ -47,7 +47,6 @@ export default defineConfig(({ mode }) => ({
     chunkSizeWarningLimit: 1000,
     reportCompressedSize: false,
     sourcemap: false,
-    // Optimize dependencies
     commonjsOptions: {
       include: [/node_modules/],
       extensions: ['.js', '.cjs'],
@@ -65,6 +64,5 @@ export default defineConfig(({ mode }) => ({
       format: 'esm',
     }
   },
-  // Add caching
   cacheDir: '.vite',
 }));
