@@ -9,7 +9,15 @@ export default defineConfig(({ mode }) => ({
     port: 8080,
   },
   plugins: [
-    react(),
+    react({
+      fastRefresh: true,
+      // Enable babel optimization
+      babel: {
+        plugins: [
+          ["@babel/plugin-transform-react-jsx", { optimize: true }]
+        ]
+      }
+    }),
     mode === 'development' && componentTagger(),
   ].filter(Boolean),
   resolve: {
@@ -21,22 +29,42 @@ export default defineConfig(({ mode }) => ({
     target: 'esnext',
     minify: 'terser',
     cssMinify: true,
+    cssCodeSplit: true,
+    modulePreload: {
+      polyfill: true
+    },
     rollupOptions: {
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
           motion: ['framer-motion'],
-          ui: ['@radix-ui/react-navigation-menu', '@radix-ui/react-dialog']
+          ui: ['@radix-ui/react-navigation-menu', '@radix-ui/react-dialog'],
+          utils: ['@tanstack/react-query']
         }
-      }
+      },
+      treeshake: true,
     },
     chunkSizeWarningLimit: 1000,
-    base: 'https://fioriforyou.com/',
     reportCompressedSize: false,
-    cssCodeSplit: true,
+    sourcemap: false,
+    // Optimize dependencies
+    commonjsOptions: {
+      include: [/node_modules/],
+      extensions: ['.js', '.cjs'],
+      strictRequires: true,
+      transformMixedEsModules: true,
+    }
   },
   optimizeDeps: {
     include: ['react', 'react-dom', 'framer-motion'],
-    exclude: ['@radix-ui/react-navigation-menu', '@radix-ui/react-dialog']
-  }
+    exclude: ['@radix-ui/react-navigation-menu', '@radix-ui/react-dialog'],
+    esbuildOptions: {
+      target: 'esnext',
+      splitting: true,
+      minify: true,
+      format: 'esm',
+    }
+  },
+  // Add caching
+  cacheDir: '.vite',
 }));
